@@ -25,8 +25,6 @@ namespace E_Commerce.API
 
             app.UseHttpsRedirection();
 
-
-
             app.MapControllers();
 
             app.Run();
