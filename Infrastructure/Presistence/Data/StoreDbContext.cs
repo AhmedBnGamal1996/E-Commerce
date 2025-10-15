@@ -18,7 +18,7 @@ namespace Presistence.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
 
 
-
+             
         }
 
         public DbSet<Product> Products { get; set; }

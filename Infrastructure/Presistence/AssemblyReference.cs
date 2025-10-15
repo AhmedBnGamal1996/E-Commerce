@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Presistence
 {
-    public class AssemblyReference
+    internal class AssemblyReference
     {
     }
 }
