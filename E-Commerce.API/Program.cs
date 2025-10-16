@@ -2,6 +2,7 @@
 using Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
+using Presistence.Repositories;
 
 namespace E_Commerce.API
 {
@@ -30,7 +31,7 @@ namespace E_Commerce.API
 
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
-
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
