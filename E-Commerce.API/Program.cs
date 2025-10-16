@@ -61,6 +61,7 @@ namespace E_Commerce.API
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.MapControllers();
 

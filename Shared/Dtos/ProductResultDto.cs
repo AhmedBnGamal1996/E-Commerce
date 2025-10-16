@@ -17,7 +17,7 @@ namespace Shared.Dtos
 
         public decimal Price { get; set; }
 
-        public string PicturUrl { get; set; } = string.Empty;
+        public string PictureUrl { get; set; } = string.Empty;
 
         public string BrandName { get; set; } = string.Empty;
 
