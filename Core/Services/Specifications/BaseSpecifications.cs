@@ -13,7 +13,7 @@ namespace Services.Specifications
         where TEntity : Domain.Entities.BaseEntity<TKey>
     {
 
-        protected BaseSpecifications(Expression<Func<TEntity, bool>> criteria)
+        protected BaseSpecifications(Expression<Func<TEntity, bool>>? criteria)
         {
             Criteria = criteria;
         }
@@ -25,8 +25,8 @@ namespace Services.Specifications
 
 
 
-
-        public Expression<Func<TEntity, bool>> Criteria { get; private set;  }
+         
+        public Expression<Func<TEntity, bool>>? Criteria { get; private set;  }
 
         public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = new (); 
 

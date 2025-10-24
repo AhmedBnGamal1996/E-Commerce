@@ -11,7 +11,7 @@ namespace Domain.Contracts
     public interface ISpecifications<TEntitiy,TKey> where TEntitiy : BaseEntity<TKey>
     {
 
-        public  Expression<Func<TEntitiy, bool>> Criteria { get; }
+        public  Expression<Func<TEntitiy, bool>>? Criteria { get; }
 
 
 
