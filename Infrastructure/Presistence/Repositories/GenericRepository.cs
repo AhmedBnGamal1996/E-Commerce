@@ -29,17 +29,9 @@ namespace Presistence.Repositories
 
 
 
-
-
-
-
-
         public async Task<IEnumerable<TEntity>> GetAllAsync(bool asNoTracking = false)
         => asNoTracking ? await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync()
                         : await _dbContext.Set<TEntity>().ToListAsync();
-
-
-
 
 
 
@@ -48,14 +40,48 @@ namespace Presistence.Repositories
 
 
 
-
-
-
-
-
-
         public void Update(TEntity entity) =>      
         _dbContext.Set<TEntity>().Update(entity);
+
+
+
+
+
+
+
+
+
+        #region Specification Pattern Methods
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, TKey> specifications)
+        => await SpecificaitionsEvluator.CreateQuery
+            (_dbContext.Set<TEntity>(), specifications).ToListAsync();
+
+
+        
+
+
+
+        public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
+            => await SpecificaitionsEvluator.CreateQuery(_dbContext.Set<TEntity>(), specifications).FirstOrDefaultAsync(); 
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        #endregion
+
+
+
 
 
 

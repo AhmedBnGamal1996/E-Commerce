@@ -29,11 +29,17 @@ namespace Domain.Contracts
         void Delete(TEntity entity);
 
 
+        #region Specification Pattern Methods
+        // Get All 
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity , TKey> specifications);
 
 
 
+        // Get By Id
+        Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications);
 
 
+        #endregion
 
 
 
