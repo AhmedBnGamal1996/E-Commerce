@@ -11,9 +11,11 @@ namespace Services.Specifications
     {
 
 
-        public ProductWithBrandAndTypedSpecifications()
+        public ProductWithBrandAndTypedSpecifications(int? typedId, int? brandId)
 
-            : base(null)
+            : base(p => ( !typedId.HasValue || p.TypeId == typedId )
+            && (!brandId.HasValue || p.BrandId == brandId) )
+
 
         {
 

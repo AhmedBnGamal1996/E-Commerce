@@ -14,11 +14,11 @@ namespace Presentation.Controllers
     {
 
         // EndPoint ==> Get All Products
-
+         
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync()
-       => Ok ( await _serviceManager.ProductService.GetAllProductsAsync() ) ;
+        public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProductsAsync(int? typedId , int? brandId)
+       => Ok ( await _serviceManager.ProductService.GetAllProductsAsync(typedId , brandId) ) ;
 
 
         // EndPoint ==> Get All Brands

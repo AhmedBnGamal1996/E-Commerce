@@ -8,7 +8,7 @@ namespace ServicesAbstraction.Contracts
 
         // Get All Products
 
-        Task<IEnumerable<ProductResultDto>> GetAllProductsAsync();
+        Task<IEnumerable<ProductResultDto>> GetAllProductsAsync(int? typedId , int? brandId);
 
 
 
