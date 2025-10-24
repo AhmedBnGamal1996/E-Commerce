@@ -16,7 +16,23 @@ namespace Presistence
             var query = inputQuery;
             if (specifications.Criteria is not null)
                 query = query.Where(specifications.Criteria); 
-            if(specifications.Criteria is not null && specifications.IncludeExpressions.Count > 0)
+
+
+            if(specifications.OrderBy is not null)
+            {
+                query = query.OrderBy(specifications.OrderBy);
+            }
+            else if (specifications.OrderByDescending is not null)
+            {
+                query = query.OrderByDescending(specifications.OrderByDescending);
+            }
+
+
+
+
+
+
+            if (specifications.Criteria is not null && specifications.IncludeExpressions.Count > 0)
 
 
             {
@@ -27,7 +43,7 @@ namespace Presistence
                     => currentQuery.Include(expression));
 
 
-                 
+                  
 
             }
 

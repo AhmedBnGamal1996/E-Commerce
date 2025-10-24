@@ -19,6 +19,9 @@ namespace Domain.Contracts
 
 
 
+        public Expression<Func<TEntitiy, object>> OrderBy { get; }
+
+        public Expression<Func<TEntitiy, object>> OrderByDescending { get;
 
 
 
@@ -26,6 +29,5 @@ namespace Domain.Contracts
 
 
 
-
-    }
+        }
 }
