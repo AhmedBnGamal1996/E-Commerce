@@ -20,6 +20,8 @@ namespace E_Commerce.API.Middlewares
             try
             {
                 await _next(context);
+                if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+                    await HandleNotFoundApiAsync(context); 
 
             }
             catch (Exception ex)
@@ -42,6 +44,25 @@ namespace E_Commerce.API.Middlewares
 
 
         }
+
+        private async Task HandleNotFoundApiAsync(HttpContext context)
+        {
+            context.Response.ContentType = "application/json";
+
+            var response = new ErrorDetails()
+            {
+                StatusCode = StatusCodes.Status400BadRequest,
+                ERrorMessage = $"The endpoint with url {context.Request.Path} not found "
+            }.ToString();
+            await context.Response.WriteAsync(response);
+
+        }
+
+
+
+
+
+
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {

@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServicesAbstraction.Contracts;
 using Shared;
@@ -36,6 +37,20 @@ namespace Presentation.Controllers
         [HttpGet("Types")]
         public async Task<ActionResult<IEnumerable<TypeResultDto>>> GetAllTypesAsync()
        => Ok(await _serviceManager.ProductService.GetAllTypesAsync());
+
+
+
+        [ProducesResponseType(typeof(ProductResultDto) , StatusCodes.Status200OK)]
+
+        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status404NotFound)]
+
+        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status500InternalServerError)]
+
+
+        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status400BadRequest)]
+
+
+
 
 
         // EndPoint ==> Get Product By ID
