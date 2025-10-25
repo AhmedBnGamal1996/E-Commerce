@@ -1,4 +1,5 @@
-﻿using Shared.Shared.ErrorModels;
+﻿using Domain.Exceptions;
+using Shared.Shared.ErrorModels;
 using System.Net;
 
 namespace E_Commerce.API.Middlewares
@@ -47,7 +48,20 @@ namespace E_Commerce.API.Middlewares
 
             //  context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            // context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+            context.Response.StatusCode = ex switch
+            {
+
+                NotFoundException => StatusCodes.Status404NotFound,
+
+
+                (_) => StatusCodes.Status500InternalServerError
+            
+            
+            
+            };
+
 
             context.Response.ContentType = "application/json";
 
