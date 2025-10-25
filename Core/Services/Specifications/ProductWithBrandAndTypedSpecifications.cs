@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.ProductModule;
+using Shared.Shared;
 using Shared.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,20 @@ namespace Services.Specifications
     {
 
 
-        public ProductWithBrandAndTypedSpecifications(int? typedId, int? brandId, ProductSortingOptions sort)
+        public ProductWithBrandAndTypedSpecifications(ProductSpecificationParameters parameters)
 
-            : base(p => ( !typedId.HasValue || p.TypeId == typedId )
-            && (!brandId.HasValue || p.BrandId == brandId) )
+            : base(p => ( !parameters.TypedId.HasValue || p.TypeId == parameters.TypedId)
+            && (!parameters.BrandId.HasValue || p.BrandId == parameters.BrandId) )
 
 
         {
 
-            AddInclude(p => p.ProductBrand);
-
+            AddInclude(p => p.ProductBrand);  
+             
             AddInclude(p => p.ProductType);
 
 
-            switch(sort)
+            switch(parameters.Sort)
             {
                 case ProductSortingOptions.NameAsc:
                     AddOrderBy(p => p.Name);
