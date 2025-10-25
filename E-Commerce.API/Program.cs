@@ -1,5 +1,6 @@
 
 using Domain.Contracts;
+using E_Commerce.API.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
 using Presistence.Repositories;
@@ -51,7 +52,7 @@ namespace E_Commerce.API
             await objOfDataSeeding.SeedDataAsync(); 
 
 
-
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
