@@ -10,13 +10,29 @@ namespace Shared.Shared
     public class ProductSpecificationParameters
     {
 
-        public  int? TypedId { get; set; }
+        private const int defaultPageSize = 5;
+        private const int MaxPageSize = 10 ;
+
+
+        public int? TypedId { get; set; }
 
         public  int? BrandId { get; set; }
 
         public ProductSortingOptions Sort { get; set; }
 
+        public string? Search {  get; set; }
 
+        public int PageIndex { get; set; }
+
+
+        private int _pageSize = defaultPageSize; 
+
+
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set { _pageSize = value > MaxPageSize ? MaxPageSize : value  ; }
+        }
 
 
 

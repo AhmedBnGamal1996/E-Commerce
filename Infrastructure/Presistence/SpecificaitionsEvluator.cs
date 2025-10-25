@@ -47,6 +47,11 @@ namespace Presistence
 
             }
 
+            if(specifications.IsPaginated)
+            {
+                query = query.Skip(specifications.Skip).Take(specifications.Take);
+            }
+
 
 
             return query;

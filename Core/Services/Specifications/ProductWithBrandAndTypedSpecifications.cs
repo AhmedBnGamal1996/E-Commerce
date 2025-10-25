@@ -16,7 +16,11 @@ namespace Services.Specifications
         public ProductWithBrandAndTypedSpecifications(ProductSpecificationParameters parameters)
 
             : base(p => ( !parameters.TypedId.HasValue || p.TypeId == parameters.TypedId)
-            && (!parameters.BrandId.HasValue || p.BrandId == parameters.BrandId) )
+            && (!parameters.BrandId.HasValue || p.BrandId == parameters.BrandId) 
+            && ( string.IsNullOrEmpty(parameters.Search) 
+            || p.Name.ToLower().Contains(parameters.Search.ToLower() )  )
+            
+            )
 
 
         {
@@ -44,6 +48,10 @@ namespace Services.Specifications
                     AddOrderBy( p => p.Name);
                     break;
             }
+
+
+
+            ApplyPagination(parameters.PageSize, parameters.PageIndex); 
 
 
         }
