@@ -1,35 +1,86 @@
 
+using Domain.Contracts;
+using E_Commerce.API.Extensions;
+using E_Commerce.API.Factories;
+using E_Commerce.API.Middlewares;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Presistence.Data;
+using Presistence.Repositories;
+using Services;
+using Services.Implementations;
+using ServicesAbstraction.Contracts;
+
 namespace E_Commerce.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
+            #region DI Container
+
+
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            //WebApiServices
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddWebApiServices();
+
+
+
+            // Infrastructure Services
+
+
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            // Core Services
+            builder.Services.AddCoreServices(builder.Configuration);
+
+            builder.Services.AddPresentationServices();
+
+
+
+
+            #endregion
+
+
+            #region  Pipeline
+
 
             var app = builder.Build();
+
+            await app.SeedDatabaseAsync();
+
+
+
+            app.UseExceptionsHandlingMiddlewares();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();  
-                app.UseSwaggerUI();
+
+                app.UseSwaggerMiddlewares();
             }
 
             app.UseHttpsRedirection();
-
-
+            app.UseStaticFiles();
+            
+            
+            app.UseAuthentication();
+            
+            app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
+
+
+            #endregion 
+
+
+
+            
         }
     }
 }
+ 
