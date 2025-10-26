@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.IdentityModule
 {
-    public  class User : IdentityUser 
+    public class User : IdentityUser 
     {
 
         public string DisplayName { get; set; } = string.Empty;
