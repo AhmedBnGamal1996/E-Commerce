@@ -7,6 +7,7 @@ using Shared;
 using Shared.Dtos.ProductModule;
 using Shared.Shared;
 using Shared.Shared.Enums;
+using Shared.Shared.ErrorModels;
 
 namespace Presentation.Controllers
 {
@@ -14,7 +15,7 @@ namespace Presentation.Controllers
     [ApiController]
     [Route("api/[controller]")]     // BaseUrl/api/WeatherForecast
 
-    public class ProductsController(IServiceManager _serviceManager) : ControllerBase 
+    public class ProductsController(IServiceManager _serviceManager) : ApiController
     {
 
         // EndPoint ==> Get All Products
@@ -42,12 +43,12 @@ namespace Presentation.Controllers
 
         [ProducesResponseType(typeof(ProductResultDto) , StatusCodes.Status200OK)]
 
-        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status404NotFound)]
 
-        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status500InternalServerError)]
 
 
-        [ProducesResponseType(typeof(ProductResultDto), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
 
 
 

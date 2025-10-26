@@ -1,5 +1,6 @@
 ﻿using Domain.Exceptions;
 using Shared.Shared.ErrorModels;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace E_Commerce.API.Middlewares
@@ -70,30 +71,43 @@ namespace E_Commerce.API.Middlewares
             //  context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             // context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            
+
+
+            context.Response.ContentType = "application/json";
+
+
+            var response = new ErrorDetails()
+            {
+
+                ERrorMessage = ex.Message
+            };
+
+
 
             context.Response.StatusCode = ex switch
             {
 
                 NotFoundException => StatusCodes.Status404NotFound,
+                UnauthorizedAccessException => StatusCodes.Status401Unauthorized ,
+                VlaidationException validationException => HandleValidationException(validationException , response),
+                (_) => StatusCodes.Status500InternalServerError, 
 
 
-                (_) => StatusCodes.Status500InternalServerError
             
             
             
             };
 
 
-            context.Response.ContentType = "application/json";
-
-            var response = new ErrorDetails()
-            {
-                StatusCode = context.Response.StatusCode,
-                ERrorMessage = ex.Message
-            }.ToString();
+                
+            
 
 
-            await context.Response.WriteAsync(response); 
+
+            response.StatusCode = context.Response.StatusCode; 
+
+            await context.Response.WriteAsync(response.ToString()); 
 
 
 
@@ -102,6 +116,11 @@ namespace E_Commerce.API.Middlewares
 
         }
 
+        private int HandleValidationException(VlaidationException validationException, ErrorDetails response)
+        {
+            response.Errors = validationException.Errors; 
+            
+            return StatusCodes.Status400BadRequest;
 
 
 
@@ -109,12 +128,6 @@ namespace E_Commerce.API.Middlewares
 
 
 
-
-
-
-
-
-
-
+        }
     }
 }

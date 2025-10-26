@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Contracts;
 using Domain.Entities.BasketModule;
+using Domain.Exceptions;
 using ServicesAbstraction.Contracts;
 using Shared.Dtos.BasketModule;
 using System;

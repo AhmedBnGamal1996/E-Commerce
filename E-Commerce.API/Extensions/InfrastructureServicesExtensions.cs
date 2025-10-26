@@ -1,6 +1,9 @@
 ﻿using Domain.Contracts;
+using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Presistence.Data;
+using Presistence.Identity;
 using Presistence.Repositories;
 using StackExchange.Redis;
 
@@ -16,6 +19,15 @@ namespace E_Commerce.API.Extensions
             });
 
 
+            services.AddDbContext<IdentityStoreDbContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+            });
+
+
+
+
+
             services.AddScoped<IDataSeeding, DataSeeding>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -25,6 +37,27 @@ namespace E_Commerce.API.Extensions
             {
                 return ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")!);
             });
+
+
+
+            services.AddIdentity<User , IdentityRole>(
+                option =>
+                {
+                    option.Password.RequireNonAlphanumeric = true;
+                    option.Password.RequireDigit = true;
+                    option.Password.RequireLowercase = true;
+                    option.Password.RequireUppercase = true;
+                    option.User.RequireUniqueEmail = true;
+
+                }).AddEntityFrameworkStores<IdentityStoreDbContext>() ;
+
+
+
+
+            // services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityStoreDbContext>();
+
+
+
             services.AddScoped<IBasketRepository , BasketRepository>();
 
 
