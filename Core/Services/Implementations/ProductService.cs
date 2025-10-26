@@ -5,7 +5,7 @@ using Domain.Exceptions;
 using Services.Specifications;
 using ServicesAbstraction.Contracts;
 using Shared;
-using Shared.Dtos;
+using Shared.Dtos.ProductModule;
 using Shared.Shared;
 using Shared.Shared.Enums;
 

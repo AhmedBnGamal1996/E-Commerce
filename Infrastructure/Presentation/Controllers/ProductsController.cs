@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServicesAbstraction.Contracts;
 using Shared;
-using Shared.Dtos;
+using Shared.Dtos.ProductModule;
 using Shared.Shared;
 using Shared.Shared.Enums;
 

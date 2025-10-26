@@ -3,7 +3,7 @@
 using AutoMapper;
 using Domain.Entities.ProductModule;
 using Services.MappingProfiles;
-using Shared.Dtos;
+using Shared.Dtos.ProductModule;
 
 namespace Services.Mapping
 {
