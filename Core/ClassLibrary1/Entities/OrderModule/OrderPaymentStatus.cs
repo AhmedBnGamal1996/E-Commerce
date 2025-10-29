@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.IdentityModule
+namespace Domain.Entities.OrderModule
 {
     public enum OrderPaymentStatus
     {
