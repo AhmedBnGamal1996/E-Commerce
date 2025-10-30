@@ -2,6 +2,7 @@
 
 
 using Domain.Entities.IdentityModule;
+using Domain.Entities.OrderModule;
 using Domain.Entities.ProductModule;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
@@ -90,8 +91,18 @@ namespace Presistence.Data
 
 
                 }
+                if (!_dbContext.DeliveryMethods.Any())
+                {
+                    var deliveryMethodData = File.OpenRead("..\\Infrastructure\\Presistence\\Data\\DataSeed\\delivery.json");
+                    // Json To C# Object
+                    var deliveryMethods = await JsonSerializer.DeserializeAsync<List<DeliveryMethod>>(deliveryMethodData);
+                    if (deliveryMethods != null && deliveryMethods.Any())
+                    {
+                        await _dbContext.DeliveryMethods.AddRangeAsync(deliveryMethods);
+                    }
+                }
 
-               await  _dbContext.SaveChangesAsync();
+                    await  _dbContext.SaveChangesAsync();
 
 
             }
