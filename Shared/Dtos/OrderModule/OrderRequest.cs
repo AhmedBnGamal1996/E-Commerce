@@ -11,11 +11,11 @@ namespace Domain.Entities.OrderModule
     public record OrderRequest
     {
 
-        public string BasketId { get; init; } = string.Empty;
+        public string BasketId { get; set; } = string.Empty;
 
-        public AddressDto ShippingAddress { get; init; } 
+        public AddressDto ShippingAddress { get; set; } 
 
-        public int DeliveryMethodId { get; init; }
+        public int DeliveryMethodId { get; set; }
 
 
 
