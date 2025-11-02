@@ -1,4 +1,5 @@
 ﻿using Shared.Dtos.IdentityModule;
+using Shared.Dtos.OrderModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,45 @@ namespace ServicesAbstraction.Contracts
 
 
         Task<UserResultDto> RegisterAsync(RegisterDto registerDto);
+
+
+
+        // Get Current User 
+
+        Task<UserResultDto> GetCurrentUserAsync(string userEmail); 
+
+
+
+
+        // Check If email Exist 
+        Task<bool> CheckEmailExistAsync(string userEmail);
+
+
+
+        // Get Address 
+
+        Task<AddressDto> GetUserAddressAsync(string userEmail);
+
+
+
+
+        // Update Address
+
+        Task<AddressDto> UpdateUserAddressAsync(string userEmail , AddressDto addressDto);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

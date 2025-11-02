@@ -33,8 +33,40 @@ namespace Services.Implementations
 
         public IBasketService BasketService => _basketService.Value;
 
-        private readonly Lazy<IAuthenticationService> _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager , _Options)); 
+        private readonly Lazy<IAuthenticationService> _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(_userManager , _Options , _mapper)); 
 
         public IAuthenticationService AuthenticationService => _authService.Value;
+
+
+
+        private readonly Lazy<IOrderService> _orderService = new Lazy<IOrderService> (() => new OrderService( _mapper , _basketRepo , _unitOfWork));
+       
+        
+        
+        
+        
+        
+        public IOrderService OrderService => _orderService.Value ;
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
 }
+
